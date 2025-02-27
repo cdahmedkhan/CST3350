@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Depot</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body> 
+    
+   
+
+    <div id="app" style="background-color: aquamarine;">
+        <h1 v-text="sitename"></h1>
+        <button v-on:click='showCheckout'>
+            <!--'cartItem' is used the same way as s data property-->
+            {{cartItemCount}}
+            <!--add the cart icon-->
+            <span class="fas fa-cart-plus"></span> Checkout<br>
+        </button>
+        
+        <div v-if="showProduct">
+    </div>
+
+        
+        <div v-else>
+
+        </div>
+
+        <main>
+                        <figure>
+                <!-- Correct binding for image source -->
+                <img v-bind:src="product.image" alt="Product Image">
+            </figure>
+
+            <h1 v-text="atiq"></h1>
+            <h2 v-text="product.title"></h2>
+            <p v-text="product.description"></p>
+            <p v-text="product.price"></p>
+            <button type="button" value="AddToCart" v-on:click="addToCart" v-show="canAddToCart"
+             v-if="canAddToCart" >Add To Cart
+            </button>
+            <button disabled="disabled" v-else>
+                add to cart
+
+            </button>
+
+</main>
+
+        
+
+    </div>
+
+    <script type="text/javascript">
+        var webstore = new Vue({ //The Vue Instance
+            el: '#app', //The 'option object': DOM mounting point
+            data: {
+                sitename:"Car Showroom",
+                atiq: 'Brand New Mercedez',
+                product: {
+                    id: 1001,
+                    title: "MG 2024",
+                    description: "Electric Car ",
+                    price: 2000,
+                    image: "car.jpeg",
+                    availableInventory : 10
+                },
+
+                cart:[],//ARRAY TO STORE ITEAMS IN SHOPPING CART
+                showProduct: true,
+                
+            },
+                methods:{
+                    addToCart:function(){
+                        this.cart.push(this.product.id);
+                    },
+                    showCheckout(){
+                        this.showProduct = this.showProduct ? false : true;
+                    }
+                },
+
+                computed:{ //the computed property object
+                    cartItemCount:function() { // the property name 
+                        //its value is calculated when its called
+                        return this.cart.length || "";
+
+                    },
+                    canAddToCart: function(){
+                        return this.product.availableInventory > this.cartItemCount;
+                    }
+
+                },
+            })
+        
+        </script>
+    
+
+    <!-- <script type="text/javascript">
+        var webstore = new Vue({
+            el: '#app',
+            data: {
+                sitename:"Car Showroom",
+                atiq: 'Brand New Mercedez',
+                product: {
+                    id: 1001,
+                    title: "MG 2024",
+                    description: "Electric Car ",
+                    price: 2000,
+                    image: "car.jpeg"  // Make sure the image file is in the correct location
+                },
+                cart: [],
+               
+                methods:{
+                    cartItemCount : function(){
+                        return this.product.length;
+
+                    },
+                    cartItemCount: function () {
+                    return this.cart.length;
+                },
+        addToCart: function () {
+          this.cart.push(this.product.id);
+        },
+
+                },
+                
+            },
+        });
+    </script> -->
+
+</body>
+</html>

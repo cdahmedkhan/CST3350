@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add cart Computed</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <button >
+            {{cartItemCount}}
+            <span class="fas fa-cart-plus"></span> Checkout<br>
+           
+        </button>
+    </header>
+    <div id="app">
+        <p>Area is equal to: {{area}} </p>
+        <p>
+            <button v-on:click="length += 1">
+                Add Length
+            </button>
+            <button v-on:click="width += 1">
+                Add Width
+            </button>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                length: 5,
+                width: 3
+            },
+            computed: {
+                area: function() {
+                    return this.width * this.length;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
